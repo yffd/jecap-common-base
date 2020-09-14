@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-public abstract class MybatisBaseDao<E extends IBaseEntity> implements IBaseDao<E> {
+public abstract class AbstractMybatisBaseDao<E extends IBaseEntity> implements IBaseDao<E> {
 
     protected abstract BaseMapper<E> getMapper();
 
