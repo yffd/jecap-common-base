@@ -11,17 +11,15 @@ public interface IBaseDao<E extends IBaseEntity> {
 
     int addBy(E entity);
 
-    int editBy(E oldEntity, E newEntity);
+    int modifyBy(E oldEntity, E newEntity);
 
-    int editById(E entity);
+    int modifyById(E entity);
 
     int removeBy(E entity);
 
     int removeById(Serializable id);
 
     int removeByIds(Set<? extends Serializable> ids);
-
-    boolean existBy(E entity);
 
     E findById(Serializable id);
 

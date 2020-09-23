@@ -11,9 +11,9 @@ public interface IBaseRepository<E extends IBaseEntity> {
 
     int add(E entity);
 
-    int replace(E oldEntity, E newEntity);
+    int modify(E oldEntity, E newEntity);
 
-    int editById(E entity);
+    int modifyById(E entity);
 
     int remove(E entity);
 

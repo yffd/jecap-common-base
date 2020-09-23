@@ -26,7 +26,7 @@ public interface MybatisplusBaseDao<E extends IBaseEntity> extends IBaseDao<E>, 
         return this.insert(entity);
     }
 
-    default int editBy(E oldEntity, E newEntity) {
+    default int modifyBy(E oldEntity, E newEntity) {
         if (null == oldEntity || null == newEntity) return 0;
         Wrapper<E> queryWrapper = this.getWrapper(oldEntity);
         if (queryWrapper.isEmptyOfWhere()) return 0;
@@ -34,7 +34,7 @@ public interface MybatisplusBaseDao<E extends IBaseEntity> extends IBaseDao<E>, 
         return this.update(newEntity, queryWrapper);
     }
 
-    default int editById(E entity) {
+    default int modifyById(E entity) {
         if (null == entity) return 0;
         this.beforeUpdate(entity);
         return this.getMapper().updateById(entity);
@@ -57,10 +57,6 @@ public interface MybatisplusBaseDao<E extends IBaseEntity> extends IBaseDao<E>, 
         if (null == ids || ids.isEmpty()) return 0;
         this.beforeDelete(ids);
         return this.deleteBatchIds(ids);
-    }
-
-    default boolean existBy(E entity) {
-        return null != this.findOne(entity);
     }
 
     default E findById(Serializable id) {

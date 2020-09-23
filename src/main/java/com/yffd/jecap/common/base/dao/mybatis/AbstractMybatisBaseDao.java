@@ -26,7 +26,7 @@ public abstract class AbstractMybatisBaseDao<E extends IBaseEntity> implements I
     }
 
     @Override
-    public int editBy(E oldEntity, E newEntity) {
+    public int modifyBy(E oldEntity, E newEntity) {
         if (null == oldEntity || null == newEntity) return 0;
         Wrapper<E> queryWrapper = this.getEntityWrapper(oldEntity);
         if (queryWrapper.isEmptyOfWhere()) return 0;
@@ -35,7 +35,7 @@ public abstract class AbstractMybatisBaseDao<E extends IBaseEntity> implements I
     }
 
     @Override
-    public int editById(E entity) {
+    public int modifyById(E entity) {
         if (null == entity) return 0;
         this.beforeUpdate(entity);
         return this.getMapper().updateById(entity);
@@ -61,11 +61,6 @@ public abstract class AbstractMybatisBaseDao<E extends IBaseEntity> implements I
         if (null == ids || ids.isEmpty()) return 0;
         this.beforeDelete(ids);
         return this.getMapper().deleteBatchIds(ids);
-    }
-
-    @Override
-    public boolean existBy(E entity) {
-        return null != this.findOne(entity);
     }
 
     @Override

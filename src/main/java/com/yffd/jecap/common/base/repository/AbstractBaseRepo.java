@@ -20,15 +20,15 @@ public abstract class AbstractBaseRepo<E extends IBaseEntity> implements IBaseRe
     }
 
     @Override
-    public int replace(E oldEntity, E newEntity) {
+    public int modify(E oldEntity, E newEntity) {
         if (null == oldEntity || null == newEntity) return 0;
-        return this.getDao().editBy(oldEntity, newEntity);
+        return this.getDao().modifyBy(oldEntity, newEntity);
     }
 
     @Override
-    public int editById(E entity) {
+    public int modifyById(E entity) {
         if (null == entity) return 0;
-        return this.getDao().editById(entity);
+        return this.getDao().modifyById(entity);
     }
 
     @Override
