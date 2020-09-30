@@ -2,11 +2,13 @@ package com.yffd.jecap.common.base.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
@@ -63,6 +65,20 @@ public abstract class BaseController {
     public <T> T getT() {
         Map<String, String> requestParams = this.getRequestParams();
         return (T) JSON.parseObject(JSON.toJSONString(requestParams));
+    }
+
+    public String getTokenId() {
+        String tokenId = this.request.getHeader("X_ACCESS_TOKEN");
+        if (StringUtils.isBlank(tokenId)) {
+            Cookie[] cookies = this.request.getCookies();
+            for (Cookie cookie : cookies) {
+                if ("X_ACCESS_TOKEN".equals(cookie.getName())) {
+                    tokenId = cookie.getValue();
+                    break;
+                }
+            }
+        }
+        return tokenId;
     }
 
 }
